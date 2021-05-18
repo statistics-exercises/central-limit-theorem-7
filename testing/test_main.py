@@ -10,6 +10,7 @@ except:
 from AutoFeedback.plotclass import line
 from AutoFeedback.funcchecks import check_func
 from AutoFeedback.randomclass import randomvar
+from scipy.stats import binom
 import unittest
 from main import *
 
@@ -27,7 +28,7 @@ class UnitTests(unittest.TestCase) :
                 inputs.append((n,i*0.1,))
                 myvar = randomvar( n*p, variance=n*p*(1-p), vmin=0, vmax=n, isinteger=True )
                 variables.append( myvar )
-        assert( check_func('binomial',inputs, variables, calls=['bernoulli'] ) ) 
+        assert( check_func('binomial',inputs, variables ) ) 
 
     def test_error(self) :
         inputs, variables = [], [] 

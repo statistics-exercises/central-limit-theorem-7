@@ -25,4 +25,6 @@ error = np.zeros(6)
 plt.bar( [0,1,2,3,4,5], histo, width=0.1 )
 # This plots the small bar around each of the values.
 plt.errorbar( [0,1,2,3,4,5], histo, yerr=error, fmt='ko' )
+plt.xlabel("Outcome")
+plt.ylabel("Fraction of occurances")
 plt.savefig("histo_with_errors.png")
