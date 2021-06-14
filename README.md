@@ -6,7 +6,7 @@ We can also use the central limit theorem to calculate error bars for histograms
 2. Write a loop that calls the `binomial` function `nsamples` times with `n=5` and `p=0.5` and that accumulates a histogram.  You should use the list called `histo` to accumulate how often each of the six possible outcomes appears in your sample of `nsamples` binomial random variables.
 3. Normalize the histogram in `histo` so that you obtain an estimate for the probability mass.
 
-Once you have completed steps 1-3 above you are in a position where you can calculate the error bars.  To compute the error bars notice that the height of each bar in your normalised histogram is a sample mean computed from `nsamples`` Bernoulli random variables.  In other words, the height of each bar in the histogram is an estimate of the parameter of a Bernoulli random variable, `p`.  We can thus approximate the sample variance of this Bernoulli random variable using:
+Once you have completed steps 1-3 above you are in a position where you can calculate the error bars.  To compute the error bars notice that the height of each bar in your normalised histogram is a sample mean computed from `nsamples` Bernoulli random variables.  In other words, the height of each bar in the histogram is an estimate of the parameter of a Bernoulli random variable, `p`.  We can thus approximate the sample variance of this Bernoulli random variable using:
 
 ![](https://render.githubusercontent.com/render/math?math=\sigma^2=p(1-p))
 
