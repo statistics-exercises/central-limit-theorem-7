@@ -7,17 +7,13 @@ except:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "AutoFeedback"])
     from AutoFeedback.plotchecks import check_plot
 
+from AutoFeedback.varchecks import check_vars
 from AutoFeedback.plotclass import line
 from AutoFeedback.funcchecks import check_func
 from AutoFeedback.randomclass import randomvar
 from scipy.stats import binom
 import unittest
 from main import *
-
-class errclass : 
-   def get_error(i) : 
-       from scipy.stats import norm
-       return ( error[i] / norm.ppf(0.95) )**2
 
 class UnitTests(unittest.TestCase) :
     def test_binom(self) :
@@ -31,13 +27,9 @@ class UnitTests(unittest.TestCase) :
         assert( check_func('binomial',inputs, variables ) ) 
 
     def test_error(self) :
-        inputs, variables = [], [] 
-        for i in range(6) :
-            inputs.append((i,))
-            pval = binom.pmf(i, 5, 0.5 )
-            myvar = randomvar( pval, dist="chi2", variance=pval*(1-pval)/nsamples, isinteger=False)
-            variables.append( myvar )
-        assert( check_func("get_error", inputs, variables, modname=errclass ) )  
+        pval, isi = binom.pmf([0,1,2,3,4,5], 5, 0.5 ), [False,False,False,False,False,False]
+        myvar = randomvar( pval, dist="chi2", variance=pval*(1-pval)/nsamples, dof=nsamples-1, limit=0.9, isinteger=isi )
+        assert( check_vars("error", myvar ) )  
 
     def test_plot(self) :
         x, e, var, bmin, bmax, isi  = [], [], [], [], [], []
